@@ -1,10 +1,7 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {useState} from 'react';
-import Orders from './src/pages/Orders';
-import SignIn from './src/pages/SignIn';
-import SignUp from './src/pages/SignUp';
+import {Provider} from 'react-redux';
+
+import store from './src/store';
+import AppInner from './AppInner';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -18,46 +15,11 @@ export type RootStackParamList = {
   SignUp: undefined;
 };
 
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator<RootStackParamList>();
-
 function App() {
-  const [isLoggedIn, setLoggedIn] = useState(false);
   return (
-    <NavigationContainer>
-      {isLoggedIn ? (
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Orders"
-            component={Orders}
-            options={{title: '오더 목록'}}
-          />
-          <Tab.Screen
-            name="Orders"
-            component={Orders}
-            options={{title: '오더 목록'}}
-          />
-          <Tab.Screen
-            name="Orders"
-            component={Orders}
-            options={{title: '오더 목록'}}
-          />
-        </Tab.Navigator>
-      ) : (
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Signin"
-            component={SignIn}
-            options={{title: '로그인'}}
-          />
-          <Stack.Screen
-            name="SignUp"
-            component={SignUp}
-            options={{title: '회원가입'}}
-          />
-        </Stack.Navigator>
-      )}
-    </NavigationContainer>
+    <Provider store={store}>
+      <AppInner />
+    </Provider>
   );
 }
 
