@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../App';
+import DismissKeyboardView from '../components/DismissKeyBoardView';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'Signin'>;
 
@@ -41,7 +42,7 @@ function SignIn({navigation, route}: SignInScreenProps) {
 
   const canGoNext = email && password;
   return (
-    <>
+    <DismissKeyboardView>
       <View style={styles.inputWrapper}>
         <Text style={styles.label}>이메일</Text>
         <TextInput
@@ -92,7 +93,7 @@ function SignIn({navigation, route}: SignInScreenProps) {
           <Text style={styles.loginButtonText}>회원가입하기</Text>
         </Pressable>
       </View>
-    </>
+    </DismissKeyboardView>
   );
 }
 
