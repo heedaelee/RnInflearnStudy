@@ -8,10 +8,10 @@ import {
   Alert,
 } from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App';
 import DismissKeyboardView from '../components/DismissKeyBoardView';
+import {RootStackParamList} from '../../AppInner';
 
-type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'Signin'>;
+type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 function SignIn({navigation, route}: SignInScreenProps) {
   const [email, setEmail] = useState('');

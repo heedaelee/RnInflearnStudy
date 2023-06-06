@@ -4,11 +4,22 @@ import {useSelector} from 'react-redux';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import {RootStackParamList} from './App';
 import Orders from './src/pages/Orders';
 import SignIn from './src/pages/SignIn';
 import SignUp from './src/pages/SignUp';
 import {RootState} from './src/store/reducer';
+
+export type LoggedInParamList = {
+  Orders: undefined;
+  Settings: undefined;
+  Delivery: undefined;
+  Complete: {orderUd: string};
+};
+
+export type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+};
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -38,7 +49,7 @@ function AppInner() {
       ) : (
         <Stack.Navigator>
           <Stack.Screen
-            name="Signin"
+            name="SignIn"
             component={SignIn}
             options={{title: '로그인'}}
           />
