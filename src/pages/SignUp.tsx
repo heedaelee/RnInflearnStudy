@@ -60,6 +60,7 @@ function SignUp({navigation}: SignUpScreenProps) {
       );
     }
     console.log(email, name, password);
+    console.log(`송신 주소  : ${Config.API_URL}/user`);
     try {
       setLoading(true);
       const response = await axios.post(`${Config.API_URL}/user`, {
