@@ -8,6 +8,8 @@ import Orders from './src/pages/Orders';
 import SignIn from './src/pages/SignIn';
 import SignUp from './src/pages/SignUp';
 import {RootState} from './src/store/reducer';
+import Delivery from './src/pages/Delivery';
+import Settings from './src/pages/Settings';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -36,14 +38,14 @@ function AppInner() {
             options={{title: '오더 목록'}}
           />
           <Tab.Screen
-            name="Orders"
-            component={Orders}
-            options={{title: '오더 목록'}}
+            name="Delivery"
+            component={Delivery}
+            options={{title: '내 오더'}}
           />
           <Tab.Screen
-            name="Orders"
-            component={Orders}
-            options={{title: '오더 목록'}}
+            name="Settings"
+            component={Settings}
+            options={{title: '내 정보'}}
           />
         </Tab.Navigator>
       ) : (
