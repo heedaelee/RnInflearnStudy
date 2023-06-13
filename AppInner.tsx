@@ -1,15 +1,23 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {useEffect} from 'react';
+import {useSelector} from 'react-redux';
 
+import axios, {AxiosError} from 'axios';
+import Config from 'react-native-config';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {Alert} from 'react-native';
+import useSocket from './src/hooks/useSocket';
+import Delivery from './src/pages/Delivery';
 import Orders from './src/pages/Orders';
+import Settings from './src/pages/Settings';
 import SignIn from './src/pages/SignIn';
 import SignUp from './src/pages/SignUp';
+import orderSlice from './src/slices/order';
+import userSlice from './src/slices/user';
+import {useAppDispatch} from './src/store';
 import {RootState} from './src/store/reducer';
-import Delivery from './src/pages/Delivery';
-import Settings from './src/pages/Settings';
 
 export type LoggedInParamList = {
   Orders: undefined;
@@ -28,6 +36,66 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppInner() {
   const isLoggedIn = useSelector((state: RootState) => !!state.user.email);
+  const dispatch = useAppDispatch();
+  const [socket, disconnect] = useSocket();
+
+  useEffect(() => {
+    const callback = (data: any) => {
+      console.log(data);
+      dispatch(orderSlice.actions.addOrder(data));
+    };
+    if (socket && isLoggedIn) {
+      socket.emit('acceptOrder', 'hello');
+      socket.on('order', callback);
+    }
+    return () => {
+      if (socket) {
+        socket.off('order', callback);
+      }
+    };
+  }, [dispatch, isLoggedIn, socket]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      console.log('!isLoggedIn', !isLoggedIn);
+      disconnect();
+    }
+  }, [isLoggedIn, disconnect]);
+
+  // 앱 실행 시 토큰 있으면 로그인하는 코드
+  useEffect(() => {
+    const getTokenAndRefresh = async () => {
+      try {
+        const token = await EncryptedStorage.getItem('refreshToken');
+        if (!token) {
+          return;
+        }
+        const response = await axios.post(
+          `${Config.API_URL}/refreshToken`,
+          {},
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        dispatch(
+          userSlice.actions.setUser({
+            name: response.data.data.name,
+            email: response.data.data.email,
+            accessToken: response.data.data.accessToken,
+          }),
+        );
+      } catch (error) {
+        console.error(error);
+        if ((error as AxiosError).response?.data.code === 'expired') {
+          Alert.alert('알림', '다시 로그인 해주세요.');
+        }
+      }
+    };
+    getTokenAndRefresh();
+  }, [dispatch]);
+
   return (
     <NavigationContainer>
       {isLoggedIn ? (

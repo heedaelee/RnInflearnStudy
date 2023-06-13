@@ -1,21 +1,21 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import axios, {AxiosError} from 'axios';
 import React, {useCallback, useRef, useState} from 'react';
 import {
-  View,
+  ActivityIndicator,
+  Alert,
+  Pressable,
+  StyleSheet,
   Text,
   TextInput,
-  StyleSheet,
-  Pressable,
-  Alert,
-  ActivityIndicator,
+  View,
 } from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import DismissKeyboardView from '../components/DismissKeyBoardView';
-import {RootStackParamList} from '../../AppInner';
-import {useAppDispatch} from '../store';
-import axios, {AxiosError} from 'axios';
 import Config from 'react-native-config';
-import userSlice from '../slices/user';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import {RootStackParamList} from '../../AppInner';
+import DismissKeyboardView from '../components/DismissKeyBoardView';
+import userSlice from '../slices/user';
+import {useAppDispatch} from '../store';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -46,6 +46,7 @@ function SignIn({navigation, route}: SignInScreenProps) {
     }
     try {
       setLoading(true);
+      console.log(`api 주소 : ${Config.API_URL}/login`);
       const response = await axios.post(`${Config.API_URL}/login`, {
         email,
         password,
