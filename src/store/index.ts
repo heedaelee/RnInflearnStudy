@@ -15,4 +15,4 @@ const store = configureStore({
 export default store;
 
 export type AppDispatch = typeof store.dispatch;
-export const useAppDipatch = () => useDispatch<AppDispatch>();
+export const useAppDispatch = () => useDispatch<AppDispatch>();
