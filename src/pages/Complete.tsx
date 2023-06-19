@@ -40,10 +40,13 @@ function Complete() {
    * react-native-image-crop-picker 의 response 객체
    */
   const onResponse = useCallback(async response => {
-    console.log(response.width, response.height.response.exif);
-    setPreview({uri: `data:${response.mime};base64, ${response.data}`});
+    console.log(response.width, response.height, response.exif);
+    setPreview({uri: `data:${response.mime};base64,${response.data}`});
     const orientation = (response.exif as any)?.Orientation;
     console.log('orientation', orientation);
+    /**
+     * 크기 조절을 위해 img Resizer 역할. = 이미지 조작
+     */
     return ImageResizer.createResizedImage(
       response.path,
       600,
@@ -70,7 +73,7 @@ function Complete() {
       includeBase64: true,
       includeExif: true,
       // ch5 patch 적용후 사용 가능한 property
-      saveToPhotos: true,
+      // saveToPhotos: true,
     })
       .then(onResponse)
       .catch(console.log);
