@@ -95,14 +95,14 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.awesomeproject"
+    namespace "com.heedae.awesomeproject"
     defaultConfig {
-        applicationId "com.awesomeproject"
+        applicationId "com.heedae.awesomeproject"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        resValue "string", "build_config_package", "com.awesomeproject"
+        resValue "string", "build_config_package", "com.heedae.awesomeproject"
     }
 
     splits {

@@ -1,19 +1,55 @@
 import React, {useCallback, useState} from 'react';
-import {Text, View, Pressable, StyleSheet} from 'react-native';
+import {
+  Text,
+  View,
+  Pressable,
+  StyleSheet,
+  Dimensions,
+  Alert,
+} from 'react-native';
 import orderSlice, {Order} from '../slices/order';
 import {useAppDispatch} from '../store';
+import NaverMapView, {Marker, Path} from 'react-native-nmap';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {LoggedInParamList} from '../../AppInner';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store/reducer';
+import axios, {AxiosError} from 'axios';
+import Config from 'react-native-config';
 
 const EachOrder = ({item}: {item: Order}) => {
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<NavigationProp<LoggedInParamList>>();
+  const [loading, setLoading] = useState(false);
   const [detail, setDetail] = useState(false);
+  const accessToken = useSelector((state: RootState) => state.user.accessToken);
+  const {start, end} = item;
+
   const toggleDetail = useCallback(() => {
     setDetail(prev => !prev);
   }, []);
 
-  const dispatch = useAppDispatch();
-
-  const onAccept = useCallback(() => {
-    dispatch(orderSlice.actions.acceptOrder(item.orderId));
-  }, [item.orderId, dispatch]);
+  const onAccept = useCallback(async () => {
+    if (!accessToken) {
+      return;
+    }
+    try {
+      await axios.post(
+        `${Config.API_URL}/accept`,
+        {orderId: item.orderId},
+        {headers: {authorization: `Bearer ${accessToken}`}},
+      );
+      dispatch(orderSlice.actions.acceptOrder(item.orderId));
+      navigation.navigate('Delivery');
+    } catch (error) {
+      let errorResponse = (error as AxiosError).response;
+      if (errorResponse?.status === 400) {
+        // 타인이 이미 수락한 경우
+        Alert.alert('알림', errorResponse.data.message);
+        dispatch(orderSlice.actions.rejectOrder(item.orderId));
+      }
+    }
+  }, [navigation, dispatch, item, accessToken]);
   const onReject = useCallback(() => {
     dispatch(orderSlice.actions.rejectOrder(item.orderId));
   }, [item.orderId, dispatch]);
@@ -29,8 +65,41 @@ const EachOrder = ({item}: {item: Order}) => {
       </Pressable>
       {detail && (
         <View>
-          <View>
-            <Text>네이버맵이 들어갈 장소</Text>
+          <View
+            style={{
+              width: Dimensions.get('window').width - 30,
+              height: 200,
+              marginTop: 10,
+            }}>
+            <NaverMapView
+              style={{width: '100%', height: '100%'}}
+              zoomControl={false}
+              center={{
+                zoom: 10,
+                tilt: 50,
+                latitude: (start.latitude + end.latitude) / 2,
+                longitude: (start.longitude + end.longitude) / 2,
+              }}>
+              <Marker
+                coordinate={{
+                  latitude: start.latitude,
+                  longitude: start.longitude,
+                }}
+                pinColor="blue"
+              />
+              <Path
+                coordinates={[
+                  {
+                    latitude: start.latitude,
+                    longitude: start.longitude,
+                  },
+                  {latitude: end.latitude, longitude: end.longitude},
+                ]}
+              />
+              <Marker
+                coordinate={{latitude: end.latitude, longitude: end.longitude}}
+              />
+            </NaverMapView>
           </View>
           <View style={styles.buttonWrapper}>
             <Pressable onPress={onAccept} style={styles.acceptButton}>
