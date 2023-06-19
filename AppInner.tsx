@@ -23,7 +23,7 @@ export type LoggedInParamList = {
   Orders: undefined;
   Settings: undefined;
   Delivery: undefined;
-  Complete: {orderUd: string};
+  Complete: {orderId: string};
 };
 
 export type RootStackParamList = {
