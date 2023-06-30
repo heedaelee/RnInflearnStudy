@@ -8,9 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* AwesomeProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AwesomeProjectTests.m */; };
-		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		6334A90D2A44235E004F4882 /* RCTTMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6334A90C2A44235E004F4882 /* RCTTMap.m */; };
+		6334A9102A442F30004F4882 /* TopLib_Op.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6334A90F2A442F30004F4882 /* TopLib_Op.a */; };
+		6334A92A2A443AF5004F4882 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6334A9262A443AF5004F4882 /* FontAwesome5_Regular.ttf */; };
+		6334A92B2A443AF5004F4882 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6334A9272A443AF5004F4882 /* FontAwesome5_Solid.ttf */; };
+		6334A92C2A443AF5004F4882 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6334A9282A443AF5004F4882 /* FontAwesome.ttf */; };
+		6334A92D2A443AF5004F4882 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6334A9292A443AF5004F4882 /* FontAwesome5_Brands.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		903BB86FB7234B11023A1B95 /* libPods-AwesomeProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0238C9672EA310A3FFFF77B9 /* libPods-AwesomeProject.a */; };
 		99E11B4DA9489CAF74B41581 /* libPods-AwesomeProject-AwesomeProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A081E1E63D7D36C7624FFF2E /* libPods-AwesomeProject-AwesomeProjectTests.a */; };
@@ -33,11 +39,38 @@
 		0238C9672EA310A3FFFF77B9 /* libPods-AwesomeProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AwesomeProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* AwesomeProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwesomeProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = AwesomeProject/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = AwesomeProject/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = AwesomeProject/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = AwesomeProject/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AwesomeProject/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AwesomeProject/main.m; sourceTree = "<group>"; };
 		19AD722C0F38AFEE596303A3 /* Pods-AwesomeProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeProject/Pods-AwesomeProject.debug.xcconfig"; sourceTree = "<group>"; };
+		6334A90B2A43E36F004F4882 /* RCTTMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTMap.h; sourceTree = "<group>"; };
+		6334A90C2A44235E004F4882 /* RCTTMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTMap.m; sourceTree = "<group>"; };
+		6334A90E2A442710004F4882 /* AwesomeProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AwesomeProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		6334A90F2A442F30004F4882 /* TopLib_Op.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = TopLib_Op.a; path = "../../../../Downloads/[iOS]TmapSDK_1.48/lib/TopLib_Op.a"; sourceTree = "<group>"; };
+		6334A9122A442FA3004F4882 /* TMapPolyLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapPolyLine.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapPolyLine.h"; sourceTree = "<group>"; };
+		6334A9132A442FA3004F4882 /* TMapPathData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapPathData.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapPathData.h"; sourceTree = "<group>"; };
+		6334A9142A442FA3004F4882 /* TMapCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapCircle.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapCircle.h"; sourceTree = "<group>"; };
+		6334A9152A442FA3004F4882 /* TMapMarkerItem2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapMarkerItem2.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapMarkerItem2.h"; sourceTree = "<group>"; };
+		6334A9162A442FA3004F4882 /* TMapPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapPolygon.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapPolygon.h"; sourceTree = "<group>"; };
+		6334A9172A442FA3004F4882 /* TMapOverlayItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapOverlayItem.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapOverlayItem.h"; sourceTree = "<group>"; };
+		6334A9182A442FA3004F4882 /* TMapTapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapTapi.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapTapi.h"; sourceTree = "<group>"; };
+		6334A9192A442FA4004F4882 /* TMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMap.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMap.h"; sourceTree = "<group>"; };
+		6334A91A2A442FA4004F4882 /* TMapBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapBaseView.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapBaseView.h"; sourceTree = "<group>"; };
+		6334A91B2A442FA4004F4882 /* TMapPOIItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapPOIItem.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapPOIItem.h"; sourceTree = "<group>"; };
+		6334A91C2A442FA4004F4882 /* TMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapAnnotation.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapAnnotation.h"; sourceTree = "<group>"; };
+		6334A91D2A442FA4004F4882 /* TMapPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapPoint.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapPoint.h"; sourceTree = "<group>"; };
+		6334A91E2A442FA4004F4882 /* TMapGpsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapGpsManager.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapGpsManager.h"; sourceTree = "<group>"; };
+		6334A91F2A442FA4004F4882 /* BizCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BizCategory.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/BizCategory.h"; sourceTree = "<group>"; };
+		6334A9202A442FA4004F4882 /* TMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapView.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapView.h"; sourceTree = "<group>"; };
+		6334A9212A442FA4004F4882 /* TMapMarkerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapMarkerItem.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapMarkerItem.h"; sourceTree = "<group>"; };
+		6334A9222A442FA4004F4882 /* TMapObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapObject.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapObject.h"; sourceTree = "<group>"; };
+		6334A9232A442FA4004F4882 /* TMapType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapType.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapType.h"; sourceTree = "<group>"; };
+		6334A9242A442FA4004F4882 /* TMapKatec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMapKatec.h; path = "../../../../../Downloads/[iOS]TmapSDK_1.48/lib/Headers/TMapKatec.h"; sourceTree = "<group>"; };
+		6334A9262A443AF5004F4882 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Regular.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		6334A9272A443AF5004F4882 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		6334A9282A443AF5004F4882 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		6334A9292A443AF5004F4882 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Brands.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AwesomeProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A081E1E63D7D36C7624FFF2E /* libPods-AwesomeProject-AwesomeProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AwesomeProject-AwesomeProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A47B84F2B08F286EE73809B7 /* Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject-AwesomeProjectTests/Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -59,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6334A9102A442F30004F4882 /* TopLib_Op.a in Frameworks */,
 				903BB86FB7234B11023A1B95 /* libPods-AwesomeProject.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,11 +121,14 @@
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				6334A90B2A43E36F004F4882 /* RCTTMap.h */,
+				6334A90C2A44235E004F4882 /* RCTTMap.m */,
+				6334A90E2A442710004F4882 /* AwesomeProject-Bridging-Header.h */,
 			);
 			name = AwesomeProject;
 			sourceTree = "<group>";
@@ -106,6 +143,43 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6334A9112A442F74004F4882 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				6334A91F2A442FA4004F4882 /* BizCategory.h */,
+				6334A9192A442FA4004F4882 /* TMap.h */,
+				6334A91C2A442FA4004F4882 /* TMapAnnotation.h */,
+				6334A91A2A442FA4004F4882 /* TMapBaseView.h */,
+				6334A9142A442FA3004F4882 /* TMapCircle.h */,
+				6334A91E2A442FA4004F4882 /* TMapGpsManager.h */,
+				6334A9242A442FA4004F4882 /* TMapKatec.h */,
+				6334A9212A442FA4004F4882 /* TMapMarkerItem.h */,
+				6334A9152A442FA3004F4882 /* TMapMarkerItem2.h */,
+				6334A9222A442FA4004F4882 /* TMapObject.h */,
+				6334A9172A442FA3004F4882 /* TMapOverlayItem.h */,
+				6334A9132A442FA3004F4882 /* TMapPathData.h */,
+				6334A91B2A442FA4004F4882 /* TMapPOIItem.h */,
+				6334A91D2A442FA4004F4882 /* TMapPoint.h */,
+				6334A9162A442FA3004F4882 /* TMapPolygon.h */,
+				6334A9122A442FA3004F4882 /* TMapPolyLine.h */,
+				6334A9182A442FA3004F4882 /* TMapTapi.h */,
+				6334A9232A442FA4004F4882 /* TMapType.h */,
+				6334A9202A442FA4004F4882 /* TMapView.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		6334A9252A4433E7004F4882 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6334A9282A443AF5004F4882 /* FontAwesome.ttf */,
+				6334A9292A443AF5004F4882 /* FontAwesome5_Brands.ttf */,
+				6334A9262A443AF5004F4882 /* FontAwesome5_Regular.ttf */,
+				6334A9272A443AF5004F4882 /* FontAwesome5_Solid.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +190,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				6334A9252A4433E7004F4882 /* Fonts */,
+				6334A9112A442F74004F4882 /* Headers */,
+				6334A90F2A442F30004F4882 /* TopLib_Op.a */,
 				13B07FAE1A68108700A75B9A /* AwesomeProject */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* AwesomeProjectTests */,
@@ -242,6 +319,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6334A92A2A443AF5004F4882 /* FontAwesome5_Regular.ttf in Resources */,
+				6334A92C2A443AF5004F4882 /* FontAwesome.ttf in Resources */,
+				6334A92B2A443AF5004F4882 /* FontAwesome5_Solid.ttf in Resources */,
+				6334A92D2A443AF5004F4882 /* FontAwesome5_Brands.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
@@ -412,7 +493,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				6334A90D2A44235E004F4882 /* RCTTMap.m in Sources */,
+				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

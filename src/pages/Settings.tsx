@@ -1,12 +1,23 @@
 import React, {useCallback, useEffect} from 'react';
-import {Alert, Pressable, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  Dimensions,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import axios, {AxiosError} from 'axios';
+import FastImage from 'react-native-fast-image';
+
 import Config from 'react-native-config';
 import {useAppDispatch} from '../store';
 import userSlice from '../slices/user';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/reducer';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import orderSlice, {Order} from '../slices/order';
 
 type params = {data: number};
 
@@ -14,6 +25,7 @@ function Settings() {
   const accessToken = useSelector((state: RootState) => state.user.accessToken);
   const money = useSelector((state: RootState) => state.user.money);
   const name = useSelector((state: RootState) => state.user.name);
+  const completes = useSelector((state: RootState) => state.order.completes);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,6 +39,17 @@ function Settings() {
       dispatch(userSlice.actions.setMoney(response.data.data));
     }
     getMoney();
+  }, [accessToken, dispatch]);
+
+  useEffect(() => {
+    async function getCompletes() {
+      const response = await axios.get<params>(`${Config.API_URL}/completes`, {
+        headers: {authorization: `Bearer ${accessToken}`},
+      });
+      console.log('completes', response.data);
+      dispatch(orderSlice.actions.setCompletes(response.data.data));
+    }
+    getCompletes();
   }, [accessToken, dispatch]);
 
   const onLogout = useCallback(async () => {
@@ -55,6 +78,24 @@ function Settings() {
     }
   }, [accessToken, dispatch]);
 
+  /**
+   * NOTE:
+   * onPress 함수가 들어가는건 빼줘야 성능 최적화가 가능, 함수의 존재 여부..
+   * 근데 renderItem이나 map내부는 걍 빼는게 편함
+   */
+  const renderItem = useCallback(({item}: {item: Order}) => {
+    return (
+      <FastImage
+        source={{uri: `${Config.API_URL}/${item.image}`}}
+        resizeMode="contain"
+        style={{
+          height: Dimensions.get('window').width / 3,
+          width: Dimensions.get('window').width / 3,
+        }}
+      />
+    );
+  }, []);
+
   return (
     <View>
       <View style={styles.money}>
@@ -65,6 +106,14 @@ function Settings() {
           </Text>
           원
         </Text>
+      </View>
+      <View>
+        <FlatList
+          data={completes}
+          keyExtractor={o => o.orderId}
+          numColumns={3}
+          renderItem={renderItem}
+        />
       </View>
       <View style={styles.buttonZone}>
         <Pressable

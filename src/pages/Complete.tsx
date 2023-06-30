@@ -1,10 +1,3 @@
-import {
-  NavigationProp,
-  RouteProp,
-  useNavigation,
-  useRoute,
-} from '@react-navigation/native';
-import axios, {AxiosError} from 'axios';
 import React, {useCallback, useState} from 'react';
 import {
   Alert,
@@ -15,14 +8,21 @@ import {
   Text,
   View,
 } from 'react-native';
-import Config from 'react-native-config';
+import {
+  NavigationProp,
+  RouteProp,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import {LoggedInParamList} from '../../AppInner';
 import ImagePicker from 'react-native-image-crop-picker';
 import ImageResizer from 'react-native-image-resizer';
+import axios, {AxiosError} from 'axios';
+import Config from 'react-native-config';
 import {useSelector} from 'react-redux';
-import {LoggedInParamList} from '../../AppInner';
+import {RootState} from '../store/reducer';
 import orderSlice from '../slices/order';
 import {useAppDispatch} from '../store';
-import {RootState} from '../store/reducer';
 
 function Complete() {
   const dispatch = useAppDispatch();
@@ -92,12 +92,15 @@ function Complete() {
     const formData = new FormData();
     formData.append('image', image);
     formData.append('orderId', orderId);
+    console.log('탐');
+    console.log(`${Config.API_URL}/complete`);
+    console.log(`${accessToken}`);
     try {
-      await axios.post(`${Config.API_URL}/complete`, formData, {
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-      });
+      await axios
+        .post(`${Config.API_URL}/complete`, formData, {
+          headers: {authorization: `Bearer ${accessToken}`},
+        })
+        .then(res => console.log(res));
       Alert.alert('알림', '완료처리 되었습니다.');
       navigation.goBack();
       navigation.navigate('Settings');

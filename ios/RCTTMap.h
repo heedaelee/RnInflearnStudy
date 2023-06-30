@@ -1,12 +1,4 @@
-//
-//  RCTTMap.h
-//  AwesomeProject
-//
-//  Created by david on 2023/06/22.
-//
+#import <React/RCTBridgeModule.h>
 
-#ifndef RCTTMap_h
-#define RCTTMap_h
-
-
-#endif /* RCTTMap_h */
+@interface RCTTMap : NSObject <RCTBridgeModule>
+@end
