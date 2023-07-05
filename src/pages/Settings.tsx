@@ -9,28 +9,25 @@ import {
   View,
 } from 'react-native';
 import axios, {AxiosError} from 'axios';
-import FastImage from 'react-native-fast-image';
-
 import Config from 'react-native-config';
+import orderSlice, {Order} from '../slices/order';
 import {useAppDispatch} from '../store';
 import userSlice from '../slices/user';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store/reducer';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import orderSlice, {Order} from '../slices/order';
-
-type params = {data: number};
+import FastImage from 'react-native-fast-image';
 
 function Settings() {
   const accessToken = useSelector((state: RootState) => state.user.accessToken);
+  const completes = useSelector((state: RootState) => state.order.completes);
   const money = useSelector((state: RootState) => state.user.money);
   const name = useSelector((state: RootState) => state.user.name);
-  const completes = useSelector((state: RootState) => state.order.completes);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     async function getMoney() {
-      const response = await axios.get<params>(
+      const response = await axios.get<{data: number}>(
         `${Config.API_URL}/showmethemoney`,
         {
           headers: {authorization: `Bearer ${accessToken}`},
@@ -43,14 +40,17 @@ function Settings() {
 
   useEffect(() => {
     async function getCompletes() {
-      const response = await axios.get<params>(`${Config.API_URL}/completes`, {
-        headers: {authorization: `Bearer ${accessToken}`},
-      });
+      const response = await axios.get<{data: number}>(
+        `${Config.API_URL}/completes`,
+        {
+          headers: {authorization: `Bearer ${accessToken}`},
+        },
+      );
       console.log('completes', response.data);
       dispatch(orderSlice.actions.setCompletes(response.data.data));
     }
     getCompletes();
-  }, [accessToken, dispatch]);
+  }, [dispatch, accessToken]);
 
   const onLogout = useCallback(async () => {
     try {
@@ -78,11 +78,6 @@ function Settings() {
     }
   }, [accessToken, dispatch]);
 
-  /**
-   * NOTE:
-   * onPress 함수가 들어가는건 빼줘야 성능 최적화가 가능, 함수의 존재 여부..
-   * 근데 renderItem이나 map내부는 걍 빼는게 편함
-   */
   const renderItem = useCallback(({item}: {item: Order}) => {
     return (
       <FastImage
@@ -110,8 +105,8 @@ function Settings() {
       <View>
         <FlatList
           data={completes}
-          keyExtractor={o => o.orderId}
           numColumns={3}
+          keyExtractor={o => o.orderId}
           renderItem={renderItem}
         />
       </View>
@@ -136,7 +131,6 @@ const styles = StyleSheet.create({
   moneyText: {
     fontSize: 16,
   },
-
   buttonZone: {
     alignItems: 'center',
     paddingTop: 20,

@@ -92,15 +92,12 @@ function Complete() {
     const formData = new FormData();
     formData.append('image', image);
     formData.append('orderId', orderId);
-    console.log('탐');
-    console.log(`${Config.API_URL}/complete`);
-    console.log(`${accessToken}`);
     try {
-      await axios
-        .post(`${Config.API_URL}/complete`, formData, {
-          headers: {authorization: `Bearer ${accessToken}`},
-        })
-        .then(res => console.log(res));
+      await axios.post(`${Config.API_URL}/complete`, formData, {
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+        },
+      });
       Alert.alert('알림', '완료처리 되었습니다.');
       navigation.goBack();
       navigation.navigate('Settings');
@@ -116,7 +113,7 @@ function Complete() {
   return (
     <View>
       <View style={styles.orderId}>
-        <Text>주문번호: {orderId}</Text>
+        <Text style={{color: 'black'}}>주문번호: {orderId}</Text>
       </View>
       <View style={styles.preview}>
         {preview && <Image style={styles.previewImage} source={preview} />}
