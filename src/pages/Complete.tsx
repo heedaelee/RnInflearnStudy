@@ -8,21 +8,21 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useAppDispatch} from '../store';
 import {
   NavigationProp,
   RouteProp,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import ImagePicker from 'react-native-image-crop-picker';
 import {LoggedInParamList} from '../../AppInner';
-import {useSelector} from 'react-redux';
-import {RootState} from '../store/reducer';
+import ImagePicker from 'react-native-image-crop-picker';
 import ImageResizer from 'react-native-image-resizer';
 import axios, {AxiosError} from 'axios';
 import Config from 'react-native-config';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store/reducer';
 import orderSlice from '../slices/order';
+import {useAppDispatch} from '../store';
 
 function Complete() {
   const dispatch = useAppDispatch();
@@ -36,17 +36,11 @@ function Complete() {
   const [preview, setPreview] = useState<{uri: string}>();
   const accessToken = useSelector((state: RootState) => state.user.accessToken);
 
-  /**
-   * react-native-image-crop-picker 의 response 객체
-   */
   const onResponse = useCallback(async response => {
     console.log(response.width, response.height, response.exif);
     setPreview({uri: `data:${response.mime};base64,${response.data}`});
     const orientation = (response.exif as any)?.Orientation;
     console.log('orientation', orientation);
-    /**
-     * 크기 조절을 위해 img Resizer 역할. = 이미지 조작
-     */
     return ImageResizer.createResizedImage(
       response.path,
       600,
@@ -65,23 +59,16 @@ function Complete() {
     });
   }, []);
 
-  /**
-   * 사진 촬영 함수
-   */
   const onTakePhoto = useCallback(() => {
     return ImagePicker.openCamera({
       includeBase64: true,
       includeExif: true,
-      // ch5 patch 적용후 사용 가능한 property
-      // saveToPhotos: true,
+      saveToPhotos: true,
     })
       .then(onResponse)
       .catch(console.log);
   }, [onResponse]);
 
-  /**
-   * 사진 선택 함수
-   */
   const onChangeFile = useCallback(() => {
     return ImagePicker.openPicker({
       includeExif: true,
@@ -92,16 +79,8 @@ function Complete() {
       .catch(console.log);
   }, [onResponse]);
 
-  /**
-   * 주문번호
-   */
   const orderId = route.params?.orderId;
-
-  /**
-   * 완료 선택 시 전송 함수
-   */
   const onComplete = useCallback(async () => {
-    // image가 없을시
     if (!image) {
       Alert.alert('알림', '파일을 업로드해주세요.');
       return;
@@ -122,9 +101,6 @@ function Complete() {
       Alert.alert('알림', '완료처리 되었습니다.');
       navigation.goBack();
       navigation.navigate('Settings');
-      /**
-       * state에 헤당 orderId 있을시 삭제, 초기화
-       */
       dispatch(orderSlice.actions.rejectOrder(orderId));
     } catch (error) {
       const errorResponse = (error as AxiosError).response;
@@ -137,7 +113,7 @@ function Complete() {
   return (
     <View>
       <View style={styles.orderId}>
-        <Text>주문번호: {orderId}</Text>
+        <Text style={{color: 'black'}}>주문번호: {orderId}</Text>
       </View>
       <View style={styles.preview}>
         {preview && <Image style={styles.previewImage} source={preview} />}
@@ -178,10 +154,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height / 3,
     resizeMode: 'contain',
   },
-  buttonWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
+  buttonWrapper: {flexDirection: 'row', justifyContent: 'center'},
   button: {
     paddingHorizontal: 20,
     paddingVertical: 10,

@@ -1124,6 +1124,8 @@ Native Module Patching
 
 ```shell
 npm i patch-package
+
+
 ```
 
 package.json
@@ -1138,6 +1140,8 @@ package.json
 
 ```shell
 npx patch-package react-native-image-crop-picker
+// yarn일떄
+yarn patch-package react-native-image-crop-picker --use-yarn
 ```
 
 - 앞으로 npm i 할 때마다 자동으로 패치가 적용됨(postinstall 스크립트 덕분)
