@@ -1,4 +1,6 @@
 apply plugin: "com.android.application"
+// 추가 7/6
+apply plugin: 'com.google.gms.google-services' 
 // react-native-config 적용 설정
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply plugin: "com.facebook.react"
@@ -155,6 +157,10 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 
+    //7/6 추가
+    implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
+    implementation("com.google.firebase:firebase-analytics")
+    
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
     implementation files('libs/com.skt.Tmap_1.70.jar')
 
