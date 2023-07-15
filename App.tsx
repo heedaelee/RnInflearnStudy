@@ -1,13 +1,31 @@
-import {Provider} from 'react-redux';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import messaging from '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
-import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import {Provider} from 'react-redux';
 
-import store from './src/store';
 import AppInner from './AppInner';
+import store from './src/store';
+import {Alert} from 'react-native';
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage);
+  PushNotification.localNotification({
+    /* Android Only Properties */
+    channelId: 'riders',
+    vibrate: true,
+    vibration: 300,
+    priority: 'high',
+    visibility: 'public',
+    // importance: 'high',
+    importance: 'high',
+    onlyAlertOnce: true,
+    /* iOS and Android properties */
+    title: 'Local Notification', // (optional)
+    message: 'My Notification Message', // (required)
+    playSound: false,
+    number: 1,
+    // actions: ['OK'],
+  });
 });
 PushNotification.configure({
   // (optional) 토큰이 생성될 때 실행됨(토큰을 서버에 등록할 때 쓸 수 있음)
@@ -19,6 +37,7 @@ PushNotification.configure({
   onNotification: function (notification: any) {
     console.log('NOTIFICATION:', notification);
     if (notification.channelId === 'riders') {
+      console.log('채널아이디 rider임');
       // if (notification.message || notification.data.message) {
       //   store.dispatch(
       //     userSlice.actions.showPushPopup(
@@ -29,11 +48,35 @@ PushNotification.configure({
     }
     // process the notification
 
+    const {title, message, channelId, id} = notification;
+
+    /**
+     * 내가 생성한 것. 7/12
+     */
+    console.log(`테스트 찍힘 :  ${title} ${message} ${channelId} ${id}`);
+    PushNotification.localNotification({
+      /* Android Only Properties */
+      channelId: 'riders',
+      vibrate: true,
+      vibration: 300,
+      priority: 'high',
+      visibility: 'public',
+      // importance: 'high',
+      importance: 'high',
+      onlyAlertOnce: true,
+      /* iOS and Android properties */
+      title: title ? title : 'Local Notification', // (optional)
+      message: message ? message : 'My Notification Message', // (required)
+      playSound: false,
+      number: 1,
+      // actions: ['OK'],
+    });
+
     // (required) 리모트 노티를 수신하거나, 열었거나 로컬 노티를 열었을 때 실행
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   },
 
-  // (optional) 등록한 액션을 누렀고 invokeApp이 false 상태일 때 실행됨, true면 onNotification이 실행됨 (Android)
+  // (optional) 등록한 액션을 눌렀고 invokeApp이 false 상태일 때 실행됨, true면 onNotification이 실행됨 (Android)
   onAction: function (notification: any) {
     console.log('ACTION:', notification.action);
     console.log('NOTIFICATION:', notification);
