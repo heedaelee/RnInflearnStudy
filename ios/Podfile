@@ -32,6 +32,8 @@ target 'AwesomeProject' do
   pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
   pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
 
+  pod 'GoogleUtilities', :modular_headers => true
+  
   # Flags change depending on the env values.
   flags = get_default_flags()
 

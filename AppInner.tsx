@@ -10,6 +10,7 @@ import {Alert} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import messaging from '@react-native-firebase/messaging';
 
 import useSocket from './src/hooks/useSocket';
 import Delivery from './src/pages/Delivery';
@@ -133,6 +134,24 @@ function AppInner() {
         return Promise.reject(error);
       },
     );
+  }, [dispatch]);
+
+  // 토큰 설정
+  useEffect(() => {
+    async function getToken() {
+      try {
+        if (!messaging().isDeviceRegisteredForRemoteMessages) {
+          await messaging().registerDeviceForRemoteMessages();
+        }
+        const token = await messaging().getToken();
+        console.log('phone token', token);
+        dispatch(userSlice.actions.setPhoneToken(token));
+        return axios.post(`${Config.API_URL}/phonetoken`, {token});
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getToken();
   }, [dispatch]);
 
   return (

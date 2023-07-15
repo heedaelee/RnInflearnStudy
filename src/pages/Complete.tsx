@@ -92,10 +92,16 @@ function Complete() {
     const formData = new FormData();
     formData.append('image', image);
     formData.append('orderId', orderId);
+    console.log(`완료 전송 ${Config.API_URL}/complete`);
+    console.log(JSON.stringify(formData));
     try {
       await axios.post(`${Config.API_URL}/complete`, formData, {
         headers: {
           authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        transformRequest: (data, headers) => {
+          return formData;
         },
       });
       Alert.alert('알림', '완료처리 되었습니다.');
