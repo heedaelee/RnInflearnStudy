@@ -1,6 +1,6 @@
 {
   "name": "AwesomeProject",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "postinstall": "patch-package",
@@ -9,7 +9,13 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "deleteDerivedData": "rm -rf ${HOME}/Library/Developer/Xcode/DerivedData/*"
+    "deleteDerivedData": "rm -rf ${HOME}/Library/Developer/Xcode/DerivedData/*",
+    "codepush:android": "appcenter codepush release-react -a adguy72-gmail.com/awesomeproject-app-android -d Staging --sourcemap-output --output-dir ./build -m -t 1.0",
+    "codepush:ios": "appcenter codepush release-react -a 아이디/앱이름 -d 배포이름 --sourcemap-output --output-dir ./build -m -t 1.0",
+    "bundle:android": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/index.android.bundle --dev false --entry-file index.js --platform android --sourcemap-output build/CodePush/index.android.bundle.map",
+    "bundle:ios": "react-native bundle --assets-dest build/CodePush --bundle-output build/CodePush/main.jsbundle --dev false --entry-file index.js --platform ios --sourcemap-output build/CodePush/main.jsbundle.map",
+    "appcenter-android-key": "appcenter codepush deployment list -a adguy72-gmail.com/awesomeproject-app-android -k",
+    "appcenter-ios-key": "appcenter codepush deployment list -a adguy72-gmail.com/awesomeproject-app-ios -k"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.18.1",
@@ -22,11 +28,17 @@
     "@react-navigation/native": "6.1.6",
     "@react-navigation/native-stack": "6.9.12",
     "@reduxjs/toolkit": "1.9.5",
+    "appcenter": "4.4.5",
+    "appcenter-analytics": "4.4.5",
+    "appcenter-cli": "2.13.9",
+    "appcenter-crashes": "4.4.5",
     "axios": "1.4.0",
+    "global": "4.4.0",
     "patch-package": "7.0.0",
     "postinstall-postinstall": "2.1.0",
     "react": "18.2.0",
     "react-native": "0.71.8",
+    "react-native-code-push": "8.0.2",
     "react-native-config": "1.5.1",
     "react-native-encrypted-storage": "4.0.3",
     "react-native-fast-image": "8.6.3",

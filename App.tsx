@@ -5,7 +5,6 @@ import {Provider} from 'react-redux';
 
 import AppInner from './AppInner';
 import store from './src/store';
-import {Alert} from 'react-native';
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage);
@@ -54,23 +53,23 @@ PushNotification.configure({
      * 내가 생성한 것. 7/12
      */
     console.log(`테스트 찍힘 :  ${title} ${message} ${channelId} ${id}`);
-    PushNotification.localNotification({
-      /* Android Only Properties */
-      channelId: 'riders',
-      vibrate: true,
-      vibration: 300,
-      priority: 'high',
-      visibility: 'public',
-      // importance: 'high',
-      importance: 'high',
-      onlyAlertOnce: true,
-      /* iOS and Android properties */
-      title: title ? title : 'Local Notification', // (optional)
-      message: message ? message : 'My Notification Message', // (required)
-      playSound: false,
-      number: 1,
-      // actions: ['OK'],
-    });
+    // PushNotification.localNotification({
+    //   /* Android Only Properties */
+    //   channelId: 'riders',
+    //   vibrate: true,
+    //   vibration: 300,
+    //   priority: 'high',
+    //   visibility: 'public',
+    //   // importance: 'high',
+    //   importance: 'high',
+    //   onlyAlertOnce: true,
+    //   /* iOS and Android properties */
+    //   title: title ? title : 'Local Notification', // (optional)
+    //   message: message ? message : 'My Notification Message', // (required)
+    //   playSound: false,
+    //   number: 1,
+    //   // actions: ['OK'],
+    // });
 
     // (required) 리모트 노티를 수신하거나, 열었거나 로컬 노티를 열었을 때 실행
     notification.finish(PushNotificationIOS.FetchResult.NoData);
